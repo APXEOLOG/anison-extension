@@ -2,6 +2,8 @@
 // @name         Anison.fm Chat Extenstion
 // @namespace    http://tampermonkey.net/
 // @version      0.1
+// @updateURL    https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
+// @downloadURL  https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @description  Few features to make life easier
 // @author       APXEOLOG
 // @match        https://anison.fm/chat/
