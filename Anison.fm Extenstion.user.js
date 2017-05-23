@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Anison.fm Chat Extenstion
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @updateURL    https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @downloadURL  https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @description  Few features to make life easier
 // @author       APXEOLOG
-// @match        https://anison.fm/chat/
+// @match        *://anison.fm/chat/
 // @grant        GM_addStyle
 // @grant        GM_getResourceText
 // @require      http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js
