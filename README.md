@@ -15,3 +15,4 @@
 # Установка
 1. Вам нужно установить расширение [GreaseMonkey](https://addons.mozilla.org/ru/firefox/addon/greasemonkey/) (Firefox) или [TamperMonkey](http://tampermonkey.net) (Chrome, Opera, Safari...), если у вас его еще нет
 2. Кликнуть по [ссылке](https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js)
+3. Не забудьте перезагрузить страницу с чатом (если она была активна)!
