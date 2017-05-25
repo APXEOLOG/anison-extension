@@ -1,27 +1,20 @@
 // ==UserScript==
 // @name         Anison.fm Chat Extenstion
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @updateURL    https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @downloadURL  https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @description  Few features to make life easier
 // @author       APXEOLOG
-// @match        *://*.anison.fm/chat/
+// @match        *://*.anison.fm/*
 // @grant        GM_addStyle
 // @grant        GM_getResourceText
-// @require      http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js
 // @resource     qtip_css http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css
 // @run-at       document-idle
 // ==/UserScript==
 
-// Load qtip styles
-GM_addStyle(GM_getResourceText("qtip_css"));
-// Custom font size
-GM_addStyle('.afm_ex_font { font-size: 16px; }');
-
-(function() {
-    'use strict';
-
+// Chat tooltip extension
+function afm_ext_chatTooltip() {
     // Let's hook data update callback and cache last status update in the local storage, so we can get this information from the content script
     // But since we are inside of the Extension Sandbox, we should create script element and append it to the document
     var statusUpdateHook = 'var _old_update_fn = window.update_status; window.update_status = function(data, textStatus) { localStorage.setItem("anisonStatusData", JSON.stringify(data)); _old_update_fn.apply(this, arguments); };';
@@ -29,10 +22,17 @@ GM_addStyle('.afm_ex_font { font-size: 16px; }');
     document.body.appendChild(script);
     // ^ That's advanced security bypass, lol
 
+    // Also apply qtip2 script and style
+    var qtip2script = document.createElement('script'); qtip2script.type = 'text/javascript'; qtip2script.src = "//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js";
+    document.body.appendChild(qtip2script);
+    GM_addStyle(GM_getResourceText("qtip_css"));
+    GM_addStyle('.afm_ex_font { font-size: 16px; }');
+
     function outer(jqElement) {
         return jqElement[0].outerHTML;
     }
 
+    // Chat tooltip extension
     $('#chat_frame').load(function() {
         // Setup hover handler
         $('#chat_frame').contents().find('#onlineList').on('mouseover', 'a', function (event) {
@@ -114,4 +114,26 @@ GM_addStyle('.afm_ex_font { font-size: 16px; }');
             }
         });
     });
+}
+
+// Logout button extension
+function afm_ext_logoutButton() {
+    if ($('#bot_panel .user_info .name').attr('href').indexOf('/login') === -1) {
+        // Show only if we are logged in
+        $('#bot_panel .user_info').append(' <span class="text">&nbsp;(<a href="/user/logout" class="name">выйти</a>)</span>');
+    }
+}
+
+(function() {
+    'use strict';
+    // Do not process iframes
+    if (window.top !== window.self) {
+        return;
+    }
+    // Always enable logout button
+    afm_ext_logoutButton();
+    // Enable chat extenson only in the chat
+    if (window.location.pathname === "/chat/") {
+        afm_ext_chatTooltip();
+    }
 })();
