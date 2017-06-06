@@ -51,7 +51,7 @@ function afm_ext_chatTooltip() {
                             $.get('user/' + userId, function (data) {
                                 // Generate tooltip
                                 var result = $(data);
-                                var output = $('<div class="profile-wrapper"><div class="col_l"></div></div>');
+                                var output = $('<div class="profile-wrapper" style="width: 250px; height: 350px;"><div class="col_l"></div></div>');
                                 var mountPoint = output.find('.col_l');
                                 // Avatar
                                 mountPoint.append(outer(result.find('.profile-wrapper .ava')));
@@ -93,12 +93,12 @@ function afm_ext_chatTooltip() {
                         }
                     },
                     position: {
-                        my: 'right top',
-                        at: 'bottom left',
+                        my: 'center right',
+                        at: 'center left',
                         target: false,
-                        viewport: $(window),
+                        viewport: $('#chat_frame'),
                         adjust: {
-                            y: 20
+                            x: 20
                         }
                     },
                     overwrite: true,
