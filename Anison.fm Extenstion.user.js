@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Anison.fm Chat Extenstion
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @updateURL    https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @downloadURL  https://github.com/APXEOLOG/anison-extension/raw/master/Anison.fm%20Extenstion.user.js
 // @description  Few features to make life easier
@@ -95,11 +95,9 @@ function afm_ext_chatTooltip() {
                     position: {
                         my: 'center right',
                         at: 'center left',
-                        target: false,
-                        viewport: $('#chat_frame'),
-                        adjust: {
-                            x: 20
-                        }
+                        target: [ window.innerWidth - 220, 85 ],
+                        effect: false,
+                        viewport: $(window),
                     },
                     overwrite: true,
                     show: {
