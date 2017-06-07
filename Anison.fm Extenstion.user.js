@@ -51,11 +51,14 @@ function afm_ext_chatTooltip() {
                             $.get('user/' + userId, function (data) {
                                 // Generate tooltip
                                 var result = $(data);
-                                var output = $('<div class="profile-wrapper" style="width: 250px; height: 350px;"><div class="col_l"></div></div>');
+                                var output = $('<div class="profile-wrapper" style="width: 250px; height: 400px;"><div class="col_l"></div></div>');
                                 var mountPoint = output.find('.col_l');
                                 // Avatar
                                 mountPoint.append(outer(result.find('.profile-wrapper .ava')));
                                 mountPoint.append('<hr class="profile-chat-border">');
+                                // Name
+                                var name = result.find('.profile-wrapper .col_c h2:eq(0)')[0].childNodes[0].nodeValue.trim();
+                                mountPoint.append('<h2>' + name + '</h2>');
                                 // Contacts
                                 mountPoint.append(outer(result.find('.profile-wrapper .profile-contact')));
                                 mountPoint.append('<hr class="profile-chat-border">');
@@ -64,6 +67,8 @@ function afm_ext_chatTooltip() {
                                 mountPoint.append('<hr class="profile-chat-border">');
                                 // Let's find the active order's position in the queue
                                 var activeOrderBlock = result.find('.profile-wrapper .active-order');
+                                // Patch buttons
+                                activeOrderBlock.find('.song_links').css({ 'left': '2px' });
                                 // Extract song link
                                 var songLink = activeOrderBlock.find('.track a').attr('href');
                                 if (songLink) {
